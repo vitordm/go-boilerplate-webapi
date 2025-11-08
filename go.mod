@@ -9,7 +9,7 @@ require (
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/thoas/go-funk v0.9.3
-	go.uber.org/dig v1.18.0
+	go.uber.org/dig v1.19.0
 )
 
 require (
