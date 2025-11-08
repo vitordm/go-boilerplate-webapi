@@ -26,3 +26,4 @@ go.work
 *.DS_Store
 .vscode/
 .idea/
+*.log
