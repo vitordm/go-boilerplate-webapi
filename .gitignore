@@ -27,3 +27,4 @@ go.work
 .vscode/
 .idea/
 *.log
+vendor/
