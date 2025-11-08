@@ -1,0 +1,19 @@
+GET http://localhost:8080/ping
+Accept: application/json
+
+<> 2024-08-28T132955.200.txt
+
+###
+
+GET http://localhost:8080/example
+Accept: application/json
+
+<> 2024-08-28T133013.200.json
+
+###
+
+POST http://localhost:8080/example
+Accept: application/json
+Content-Type: application/json
+
+{ "example_field": "Message 1" }
