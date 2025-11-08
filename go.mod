@@ -1,6 +1,6 @@
 module github.com/vitordm/go-boilerplate-webapi
 
-go 1.25
+go 1.2
 
 require (
 	github.com/go-playground/validator/v10 v10.28.0
