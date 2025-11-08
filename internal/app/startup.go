@@ -1,10 +1,11 @@
 package app
 
 import (
-	"github.com/labstack/echo/v4"
 	"log/slog"
 	"os"
 	"path/filepath"
+
+	"github.com/labstack/echo/v4"
 
 	"github.com/labstack/echo/v4/middleware"
 	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers"
@@ -30,8 +31,7 @@ func Configure(e *echo.Echo) {
 
 	container = ioc.NewContainerDI()
 	cache = helpers.BuildCache()
-	logger = helpers.NewSLogJsonCommandLine()
-	//logger = helpers.NewSLogJsonCommandLineAndFile()
+	logger = helpers.BuildLogger()
 
 	di.RegisterDependencies(container, logger)
 

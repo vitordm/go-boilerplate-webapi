@@ -3,32 +3,33 @@ package helpers
 import (
 	"context"
 	"fmt"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers/constants"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/logger"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
 	"io"
 	"log/slog"
 	"os"
 	"path"
 	"time"
+
+	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers/constants"
+	"github.concur.com/I573758/example-golang-webapi/internal/core/logger"
+	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
 )
+
+func BeforeHandle(ctx context.Context) []slog.Attr {
+	var result []slog.Attr
+
+	correlationId := ctx.Value(constants.CorrelationIdKey{})
+	if correlationId != nil && correlationId != "" {
+		result = append(result, slog.String("correlation_id", correlationId.(string)))
+	}
+	return result
+}
 
 func NewSLogJsonCommandLine() *slog.Logger {
 	handlerOptions := slog.HandlerOptions{
 		AddSource: true,
 	}
 	handler := slog.NewJSONHandler(os.Stdout, &handlerOptions)
-
-	beforeHandle := func(ctx context.Context) []slog.Attr {
-		var result []slog.Attr
-
-		correlationId := ctx.Value(constants.CorrelationIdKey{})
-		if correlationId != nil && correlationId != "" {
-			result = append(result, slog.String("correlation_id", correlationId.(string)))
-		}
-		return result
-	}
-	l := slog.New(logger.NewHandler(handler, beforeHandle))
+	l := slog.New(logger.NewHandler(handler, BeforeHandle))
 	return l
 }
 
@@ -45,17 +46,7 @@ func NewSLogJsonCommandLineAndFile() *slog.Logger {
 	logOutput := io.MultiWriter(fileWriter, os.Stdout)
 
 	handler := slog.NewJSONHandler(logOutput, &handlerOptions)
-
-	beforeHandle := func(ctx context.Context) []slog.Attr {
-		var result []slog.Attr
-
-		correlationId := ctx.Value(constants.CorrelationIdKey{})
-		if correlationId != nil && correlationId != "" {
-			result = append(result, slog.String("correlation_id", correlationId.(string)))
-		}
-		return result
-	}
-	l := slog.New(logger.NewHandler(handler, beforeHandle))
+	l := slog.New(logger.NewHandler(handler, BeforeHandle))
 	return l
 }
 
@@ -65,18 +56,23 @@ func NewSLogTextCommandLine() *slog.Logger {
 	}
 	//handler := slog.NewJSONHandler(os.Stdout, &handlerOptions)
 	handler := slog.NewTextHandler(os.Stdout, &handlerOptions)
-
-	beforeHandle := func(ctx context.Context) []slog.Attr {
-		var result []slog.Attr
-
-		correlationId := ctx.Value(constants.CorrelationIdKey{})
-		if correlationId != nil && correlationId != "" {
-			result = append(result, slog.String("correlation_id", correlationId.(string)))
-		}
-		return result
-	}
-	l := slog.New(logger.NewHandler(handler, beforeHandle))
+	l := slog.New(logger.NewHandler(handler, BeforeHandle))
 	return l
+}
+
+func BuildLogger() *slog.Logger {
+	typeLogger := utils.GetEnvOrDefault(constants.LOGGER_TYPE_KEY, constants.LOGGER_TYPE_DEFAULT)
+
+	if typeLogger == constants.LOGGER_TYPE_JSON {
+		return NewSLogJsonCommandLine()
+	}
+
+	if typeLogger == constants.LOGGER_TYPE_FILE {
+		return NewSLogJsonCommandLineAndFile()
+	}
+
+	return NewSLogTextCommandLine()
+
 }
 
 type LogFileWriter struct {
