@@ -1,11 +1,12 @@
 package routes
 
 import (
-	"github.concur.com/I573758/example-golang-webapi/internal/app/http"
-	coreCache "github.concur.com/I573758/example-golang-webapi/internal/core/cache"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/ioc"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/server"
 	"log/slog"
+
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/http"
+	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
 )
 
 func DefineAllRoutes(router *server.Router, container *ioc.ContainerDI, cache *coreCache.Cache, logger *slog.Logger) {

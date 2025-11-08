@@ -8,15 +8,15 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"github.com/labstack/echo/v4/middleware"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers/constants"
-	di "github.concur.com/I573758/example-golang-webapi/internal/app/helpers/ioc"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/middlewares"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/routes"
-	coreCache "github.concur.com/I573758/example-golang-webapi/internal/core/cache"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/ioc"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/server"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
+	di "github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/ioc"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/middlewares"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/routes"
+	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 var container *ioc.ContainerDI

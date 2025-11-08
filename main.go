@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.concur.com/I573758/example-golang-webapi/internal/app"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app"
 )
 
 func main() {

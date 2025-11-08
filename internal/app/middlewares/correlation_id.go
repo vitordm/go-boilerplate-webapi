@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers/constants"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 const correlationIdHeaderKey = "X-Correlation-Id"

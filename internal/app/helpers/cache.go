@@ -1,10 +1,11 @@
 package helpers
 
 import (
-	"github.com/patrickmn/go-cache"
-	coreCache "github.concur.com/I573758/example-golang-webapi/internal/core/cache"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
 	"time"
+
+	"github.com/patrickmn/go-cache"
+	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 func BuildCache() *coreCache.Cache {

@@ -9,9 +9,9 @@ import (
 	"path"
 	"time"
 
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers/constants"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/logger"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/logger"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 func BeforeHandle(ctx context.Context) []slog.Attr {

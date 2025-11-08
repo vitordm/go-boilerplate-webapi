@@ -2,7 +2,8 @@ package data
 
 import (
 	"fmt"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
+
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 type ExampleRepository interface {

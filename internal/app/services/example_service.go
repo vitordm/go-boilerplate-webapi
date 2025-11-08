@@ -1,6 +1,6 @@
 package services
 
-import "github.concur.com/I573758/example-golang-webapi/internal/app/data"
+import "github.com/vitordm/go-boilerplate-webapi/internal/app/data"
 
 type ExampleService interface {
 	ExampleMethodFromService() string

@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 func EasterEggMiddleware() echo.MiddlewareFunc {

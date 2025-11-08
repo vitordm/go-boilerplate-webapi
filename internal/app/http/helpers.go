@@ -2,10 +2,11 @@ package http
 
 import (
 	"errors"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/helpers"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/server"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/utils"
 	"net/http"
+
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
 )
 
 type DefaultResponse struct {

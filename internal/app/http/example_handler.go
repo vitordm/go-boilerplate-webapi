@@ -2,12 +2,13 @@ package http
 
 import (
 	"fmt"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/services"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/ioc"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/server"
-	"github.concur.com/I573758/example-golang-webapi/pkg/models/requests"
-	"github.concur.com/I573758/example-golang-webapi/pkg/models/responses"
 	"time"
+
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/services"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
+	"github.com/vitordm/go-boilerplate-webapi/pkg/models/requests"
+	"github.com/vitordm/go-boilerplate-webapi/pkg/models/responses"
 )
 
 func GetExample(container *ioc.ContainerDI, c server.Context) error {

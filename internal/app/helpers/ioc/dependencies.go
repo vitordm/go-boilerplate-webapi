@@ -1,10 +1,11 @@
 package ioc
 
 import (
-	"github.concur.com/I573758/example-golang-webapi/internal/app/data"
-	"github.concur.com/I573758/example-golang-webapi/internal/app/services"
-	"github.concur.com/I573758/example-golang-webapi/internal/core/ioc"
 	"log/slog"
+
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/data"
+	"github.com/vitordm/go-boilerplate-webapi/internal/app/services"
+	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
 )
 
 func RegisterDependencies(container *ioc.ContainerDI, logger *slog.Logger) {
