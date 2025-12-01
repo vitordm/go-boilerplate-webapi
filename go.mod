@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/go-playground/validator/v10 v10.28.0
-	github.com/jedib0t/go-pretty/v6 v6.7.0
+	github.com/jedib0t/go-pretty/v6 v6.7.5
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/oklog/ulid/v2 v2.1.1
 	github.com/patrickmn/go-cache v2.1.0+incompatible
