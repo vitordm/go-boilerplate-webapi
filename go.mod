@@ -5,7 +5,7 @@ go 1.25
 require (
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/jedib0t/go-pretty/v6 v6.7.8
-	github.com/labstack/echo/v4 v4.14.0
+	github.com/labstack/echo/v4 v4.15.0
 	github.com/oklog/ulid/v2 v2.1.1
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/thoas/go-funk v0.9.3
