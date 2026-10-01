@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/go-playground/validator/v10 v10.30.3
 	github.com/jedib0t/go-pretty/v6 v6.8.3
-	github.com/labstack/echo/v4 v4.15.4
+	github.com/labstack/echo/v4 v4.16.0
 	github.com/oklog/ulid/v2 v2.1.2
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/thoas/go-funk v0.9.3
@@ -27,6 +27,6 @@ require (
 	golang.org/x/crypto v0.53.0 // indirect
 	golang.org/x/net v0.56.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
-	golang.org/x/text v0.38.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 )
