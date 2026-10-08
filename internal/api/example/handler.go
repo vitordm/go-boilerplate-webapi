@@ -2,9 +2,9 @@ package http
 
 import (
 	"fmt"
-	"net/http"
 	"time"
 
+	. "github.com/vitordm/go-boilerplate-webapi/internal/api/responses"
 	"github.com/vitordm/go-boilerplate-webapi/internal/api/server"
 	"github.com/vitordm/go-boilerplate-webapi/internal/application/example/get"
 	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/di"
@@ -31,16 +31,5 @@ func PostExample(container *di.ContainerDI, c server.Context) error {
 		response.Message = fmt.Sprintf("%s - %s", request.ExampleField, message)
 		response.Date = time.Now()
 		return Ok(c, response)
-	})
-}
-
-func Ok(c server.Context, body interface{}) error {
-	return c.JSON(http.StatusOK, body)
-}
-
-func BadRequest(c server.Context, err error) error {
-	return c.JSON(http.StatusBadRequest, map[string]interface{}{
-		"message": "Bad request",
-		"error":   err.Error(),
 	})
 }
