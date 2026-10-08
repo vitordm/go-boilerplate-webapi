@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . /app
 
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -o application
+RUN CGO_ENABLED=0 GOOS=linux go build cmd/api/main.go -o application
 
 EXPOSE 8080
 
