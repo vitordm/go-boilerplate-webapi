@@ -136,3 +136,27 @@ internal/composition/api.go
                ├── Routes
                ├── Middleware
                └── Handlers
+
+## Dependências e regras
+
+```text
+API
+ ↓
+Application
+ ↓
+Domain
+
+Application
+ ↓
+Contracts
+ ↑
+Infrastructure
+```
+
+- `internal` contém código de uso interno da aplicação.
+- `pkg` contém contratos cuja reutilização externa é intencional.
+- `shared` contém somente código realmente genérico.
+- `application` contém casos de uso e não conhece HTTP, banco ou `dig`.
+- `domain` contém regras de negócio independentes de transporte e persistência.
+- `infrastructure` contém implementações externas.
+- `composition` monta as dependências da API e do worker.

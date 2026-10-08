@@ -14,6 +14,6 @@ func NewExampleRepository() persistence.ExampleRepository {
 	return &exampleRepository{}
 }
 
-func (repository *exampleRepository) ExampleMethodFromRepositoy() string {
+func (repository *exampleRepository) ExampleMethodFromRepository() string {
 	return fmt.Sprintf("Hello from ExampleRepository %s", utils.RandomString(10))
 }

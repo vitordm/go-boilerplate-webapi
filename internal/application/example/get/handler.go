@@ -1,17 +1,11 @@
 package get
 
-type GetExampleHandler interface {
-	Get() string
+import "github.com/vitordm/go-boilerplate-webapi/internal/contracts/persistence"
+
+type Handler struct{ repository persistence.ExampleRepository }
+
+func NewHandler(repository persistence.ExampleRepository) *Handler {
+	return &Handler{repository: repository}
 }
 
-type exampleHandler struct {
-}
-
-func NewExampleService() GetExampleHandler {
-	return &exampleHandler{}
-}
-
-func (service *exampleHandler) Get() string {
-	//return service.repository.ExampleMethodFromRepositoy()
-	return ""
-}
+func (h *Handler) Get() string { return h.repository.ExampleMethodFromRepository() }
