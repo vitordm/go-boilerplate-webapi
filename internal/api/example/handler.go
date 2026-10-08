@@ -2,34 +2,45 @@ package http
 
 import (
 	"fmt"
+	"net/http"
 	"time"
 
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/services"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
-	"github.com/vitordm/go-boilerplate-webapi/pkg/models/requests"
-	"github.com/vitordm/go-boilerplate-webapi/pkg/models/responses"
+	"github.com/vitordm/go-boilerplate-webapi/internal/api/server"
+	"github.com/vitordm/go-boilerplate-webapi/internal/application/example/get"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/di"
+	examplecontract "github.com/vitordm/go-boilerplate-webapi/pkg/contracts/example"
 )
 
-func GetExample(container *ioc.ContainerDI, c server.Context) error {
-	return container.Invoke(func(service services.ExampleService) error {
-		response := service.ExampleMethodFromService()
+func GetExample(container *di.ContainerDI, c server.Context) error {
+	return container.Invoke(func(service get.GetExampleHandler) error {
+		response := service.Get()
 		return Ok(c, response)
 	})
 }
 
-func PostExample(container *ioc.ContainerDI, c server.Context) error {
-	return container.Invoke(func(service services.ExampleService) error {
-		request := new(requests.ExampleRequest)
+func PostExample(container *di.ContainerDI, c server.Context) error {
+	return container.Invoke(func(service get.GetExampleHandler) error {
+		request := new(examplecontract.ExampleRequest)
 		if err := c.Bind(request); err != nil {
 			return BadRequest(c, err)
 		}
 
-		message := service.ExampleMethodFromService()
+		message := service.Get()
 
-		response := new(responses.ExampleResponse)
+		response := new(examplecontract.ExampleResponse)
 		response.Message = fmt.Sprintf("%s - %s", request.ExampleField, message)
 		response.Date = time.Now()
 		return Ok(c, response)
+	})
+}
+
+func Ok(c server.Context, body interface{}) error {
+	return c.JSON(http.StatusOK, body)
+}
+
+func BadRequest(c server.Context, err error) error {
+	return c.JSON(http.StatusBadRequest, map[string]interface{}{
+		"message": "Bad request",
+		"error":   err.Error(),
 	})
 }

@@ -9,9 +9,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/logger"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/logging"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/constants"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/utils"
 )
 
 func BeforeHandle(ctx context.Context) []slog.Attr {
@@ -29,7 +29,7 @@ func NewSLogJsonCommandLine() *slog.Logger {
 		AddSource: true,
 	}
 	handler := slog.NewJSONHandler(os.Stdout, &handlerOptions)
-	l := slog.New(logger.NewHandler(handler, BeforeHandle))
+	l := slog.New(logging.NewHandler(handler, BeforeHandle))
 	return l
 }
 
@@ -46,7 +46,7 @@ func NewSLogJsonCommandLineAndFile() *slog.Logger {
 	logOutput := io.MultiWriter(fileWriter, os.Stdout)
 
 	handler := slog.NewJSONHandler(logOutput, &handlerOptions)
-	l := slog.New(logger.NewHandler(handler, BeforeHandle))
+	l := slog.New(logging.NewHandler(handler, BeforeHandle))
 	return l
 }
 
@@ -56,7 +56,7 @@ func NewSLogTextCommandLine() *slog.Logger {
 	}
 	//handler := slog.NewJSONHandler(os.Stdout, &handlerOptions)
 	handler := slog.NewTextHandler(os.Stdout, &handlerOptions)
-	l := slog.New(logger.NewHandler(handler, BeforeHandle))
+	l := slog.New(logging.NewHandler(handler, BeforeHandle))
 	return l
 }
 

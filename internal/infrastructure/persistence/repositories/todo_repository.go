@@ -1,8 +1,9 @@
 package repositories
 
-type todoRepository struct {
-}
+import "github.com/vitordm/go-boilerplate-webapi/internal/contracts/persistence"
 
-func NewTodoRepository() TodoRepository {
-	return &exampleRepository{}
+type todoRepository struct{}
+
+func NewTodoRepository() persistence.TodoRepository {
+	return &todoRepository{}
 }

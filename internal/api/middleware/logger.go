@@ -6,7 +6,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/constants"
 )
 
 func Logger(logger *slog.Logger) echo.MiddlewareFunc {

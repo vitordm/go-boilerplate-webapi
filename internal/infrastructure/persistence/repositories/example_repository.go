@@ -3,16 +3,17 @@ package repositories
 import (
 	"fmt"
 
-	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/common"
+	"github.com/vitordm/go-boilerplate-webapi/internal/contracts/persistence"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/utils"
 )
 
 type exampleRepository struct {
 }
 
-func NewExampleRepository() ExampleRepository {
+func NewExampleRepository() persistence.ExampleRepository {
 	return &exampleRepository{}
 }
 
 func (repository *exampleRepository) ExampleMethodFromRepositoy() string {
-	return fmt.Sprintf("Hello from ExampleRepository %s", common.RandomString(10))
+	return fmt.Sprintf("Hello from ExampleRepository %s", utils.RandomString(10))
 }

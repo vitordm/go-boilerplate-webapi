@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/patrickmn/go-cache"
-	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
+	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/utils"
 )
 
 func BuildCache() *coreCache.Cache {

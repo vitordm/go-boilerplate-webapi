@@ -7,29 +7,31 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/labstack/echo/v4"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/http"
-	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
+	"github.com/thoas/go-funk"
+	api "github.com/vitordm/go-boilerplate-webapi/internal/api/example"
+	"github.com/vitordm/go-boilerplate-webapi/internal/api/server"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/di"
 )
 
-func DefineAllRoutes(router *server.Router, container *ioc.ContainerDI, cache *coreCache.Cache, logger *slog.Logger) {
+func DefineAllRoutes(router *server.Router, container *di.ContainerDI, cache *cache.Cache, logger *slog.Logger) {
 
 	router.GET("/ping", func(c server.Context) error {
 		return c.String(200, "pong")
 	})
 
 	router.GET("/example", func(c server.Context) error {
-		return http.GetExample(container, c)
+		return api.GetExample(container, c)
 	})
 
 	router.POST("/example", func(c server.Context) error {
-		return http.PostExample(container, c)
+		return api.PostExample(container, c)
 	})
 }
 
-func OutputRoutes(e *Router) {
+func OutputRoutes(e *server.Router) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{"#", "Method", "Path"})

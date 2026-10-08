@@ -2,43 +2,38 @@ package composition
 
 import (
 	"log/slog"
-
-	"log/slog"
 	"os"
 	"path/filepath"
 
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/data"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/services"
-	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/di"
-
 	"github.com/labstack/echo/v4"
-
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/constants"
-	di "github.com/vitordm/go-boilerplate-webapi/internal/app/helpers/ioc"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/middlewares"
-	"github.com/vitordm/go-boilerplate-webapi/internal/app/routes"
-	coreCache "github.com/vitordm/go-boilerplate-webapi/internal/core/cache"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/ioc"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/server"
-	"github.com/vitordm/go-boilerplate-webapi/internal/core/utils"
+	echoMiddleware "github.com/labstack/echo/v4/middleware"
+	apiMiddleware "github.com/vitordm/go-boilerplate-webapi/internal/api/middleware"
+	"github.com/vitordm/go-boilerplate-webapi/internal/api/routes"
+	"github.com/vitordm/go-boilerplate-webapi/internal/api/server"
+	"github.com/vitordm/go-boilerplate-webapi/internal/application/example/get"
+	"github.com/vitordm/go-boilerplate-webapi/internal/contracts/persistence"
+	infraCache "github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/cache"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/di"
+	"github.com/vitordm/go-boilerplate-webapi/internal/infrastructure/persistence/repositories"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/constants"
+	"github.com/vitordm/go-boilerplate-webapi/internal/shared/utils"
 )
 
-var container *ioc.ContainerDI
-var cache *coreCache.Cache
+var container *di.ContainerDI
+var cache *infraCache.Cache
 var logger *slog.Logger
 
 func registerDependencies(container *di.ContainerDI, logger *slog.Logger) {
 
 	//repositories
-	container.Provide(func() (data.ExampleRepository, error) {
-		return data.NewExampleRepository(), nil
+	container.Provide(func() (persistence.ExampleRepository, error) {
+		return repositories.NewExampleRepository(), nil
 	})
 
 	//services
-	container.Provide(func(repository data.ExampleRepository) (services.ExampleService, error) {
-		return services.NewExampleService(repository), nil
+	container.Provide(func() get.GetExampleHandler {
+		return get.NewExampleService()
 	})
 
 }
@@ -70,23 +65,23 @@ func NewApi() *webApi {
 
 	e.Validator = server.NewRequestValidator()
 
-	container = ioc.NewContainerDI()
-	cache = helpers.BuildCache()
-	logger = helpers.BuildLogger()
+	container = di.NewContainerDI()
+	cache = shared.BuildCache()
+	logger = shared.BuildLogger()
 
 	registerDependencies(container, logger)
 
 	// Middleware
-	e.Use(middlewares.EasterEggMiddleware())
-	e.Use(middlewares.CorrelationId())
-	e.Use(middlewares.Logger(logger))
-	e.Use(middleware.Recover())
-	e.Use(middleware.CORS())
+	e.Use(apiMiddleware.EasterEggMiddleware())
+	e.Use(apiMiddleware.CorrelationId())
+	e.Use(apiMiddleware.Logger(logger))
+	e.Use(echoMiddleware.Recover())
+	e.Use(echoMiddleware.CORS())
 	routes.DefineAllRoutes(e, container, cache, logger)
 
 	if utils.IsDev() {
 		e.Debug = true
-		server.OutputRoutes(e)
+		routes.OutputRoutes(e)
 	}
 
 	port := utils.GetEnvOrDefault(constants.APPLICATION_PORT_KEY,
@@ -94,4 +89,8 @@ func NewApi() *webApi {
 
 	return &webApi{e, port}
 
+}
+
+func NewAPI() *webApi {
+	return NewApi()
 }
